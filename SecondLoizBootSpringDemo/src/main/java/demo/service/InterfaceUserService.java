@@ -14,5 +14,7 @@ public interface InterfaceUserService {
 
 	boolean deleteUser(Long argId);
 
-	boolean addUser(User objUser);	
+	boolean addUser(User objUser);
+
+	User updateUser(User objUser);
 }

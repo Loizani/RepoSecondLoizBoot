@@ -1,5 +1,7 @@
 package demo.service ;
 
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +14,7 @@ import demo.service.InterfaceUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.apache.commons.beanutils.PropertyUtils; 
 
 @Service
 @Transactional
@@ -41,7 +44,7 @@ public class UserService implements InterfaceUserService {
 		objBeanUser.deleteById(argId);
 		bSuccess = true ;
 		return bSuccess ;		
-	}
+	} 
 	@Override
 	public boolean addUser(User objUser) {
 		boolean bSuccess;
@@ -50,4 +53,19 @@ public class UserService implements InterfaceUserService {
 		bSuccess = true ;
 		return bSuccess ;		
 	}
+	
+	@Override
+	public User updateUser(User objUser) {
+		boolean bSuccess = false ;			
+		System.out.println("UserService > updateUser > objUser.toString() = " + objUser.toString() ) ;	
+		try {
+		objBeanUser.save(objUser);
+		}
+		catch(Exception e) { System.out.println("objBeanUser.save erreur :  " + e.getMessage()) ;} 
+		bSuccess = true ;
+		
+		return objUser ;
+		
+	}
+	
 }
